@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Food Menu</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #3b93ae;
+        }
+        header {
+            background-color: #333;
+            color: #fff;
+            text-align: center;
+            padding: 10px 0;
+        }
+        .menu-container { 
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            width: auto;
+            height: 200px;
+    
+        }
+        .menu-item {
+            margin: 10px 0;
+            padding: 10px;
+            border: 1px solid #ccc;
+            background-color: #ffffff;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        .menu-item:hover {
+            background-color: #eeff00;
+        }
+        h2 {
+            margin-top: 0;
+        }
+        .our-food{
+            text-align: center;
+        }
+       
+
+        .cart {
+            border: 1px solid #ccc;
+            padding: 20px;
+            background-color: #f9f9f9;
+            margin-bottom: 50px;
+            align-items:flex;
+        }
+        .cart-item {
+            margin-bottom: 10px;
+            display:flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .btn {
+            display: inline-block;
+            padding: 8px 15px;
+            background-color: #333;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+        }
+        .btn:hover {
+            background-color: #555;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+        <h1>Delicious Restaurant</h1>
+        <p>Discover Our Interactive Menu</p>
+        </nav>
+    </header>
+    <section class="our-food">
+        <h2> <u>Our Food Menu</u></h2>
+    </section>
+    <div class="menu-container">
+    
+        <div class="menu-item" onclick="addToCart('Chicken-Mandi', 6.25)">
+            <img src="/Resturant Project/Chicken-Mandi.jpg" height="200px" alt="Chicken-Mandi">
+            <h3>Chicken-Mandi</h3>
+            <p>Delicious Burger with fresh lettuce, tomatoes, onions, and special sauce.</p>
+            <p>Price: $6.25</p>
+        </div>
+        <div class="menu-item" onclick="addToCart('Pasta Alfredo', 3.8)">
+            <img src="/Resturant Project/Pasta Alfredo.jpg" height="200px" alt="Pasta Alfredo">
+            <h3>Pasta Alfredo</h3>
+            <p>Creamy alfredo sauce with perfectly cooked pasta, served with garlic bread.</p>
+            <p>Price: $3.8</p>
+        </div>
+        <div class="menu-item" onclick="addToCart('Garden Salad', 2.5)">
+            <img src="/Resturant Project/Garden-salad.jpg" height="200px" alt="Garden-salad">
+            <h3>Garden Salad</h3>
+            <p>Fresh mixed greens with assorted vegetables and balsamic vinaigrette.</p>
+            <p>Price: $2.5</p>
+        </div>
+        <div class="menu-item" onclick="addToCart('Filipino Chicken Adobo', 3.7)">
+            <img src="/Resturant Project/Filipino Chicken Adobo.jpeg" height="200px" alt="Filipino Chicken Adobo">
+            <h3>Filipino Chicken Adobo</h3>
+            <p>Fresh mixed greens with assorted vegetables and balsamic vinaigrette.</p>
+            <p>Price: $3.7</p>
+        </div>
+        <div class="menu-item" onclick="addToCart('Chicken-Biryani', 2.5)">
+            <img src="/Resturant Project/Chicken-Biryani.jpg" height="200px" alt="Chicken-Biryani">
+            <h3>Chicken-Biryani</h3>
+            <p>Creamy alfredo sauce with perfectly cooked pasta, served with garlic bread.</p>
+            <p>Price: $2.5</p>
+        </div>
+        <div class="menu-item" onclick="addToCart('Chicken-Lollipop', 2.5)">
+            <img src="/Resturant Project/Chicken-Lollipop.jpg" height="200px" alt="Chicken-Lollipop">
+            <h3>Chicken-Lollipop</h3>
+            <p>Fresh mixed greens with assorted vegetables and balsamic vinaigrette.</p>
+            <p>Price: $2.5</p>
+        </div>
+        <!-- Add more menu items as needed -->
+    </div>
+
+    <section  style="text-align: center; margin-top: 650px; border: solid;border-color: black; border-radius: 20px; padding: 10px;">
+    <div class="cart">
+        <h2>Your Cart</h2>
+        <div id="cart-items">
+            <!-- Cart items will be added here -->
+        </div>
+        <p>Total: $<span id="cart-total">0.00</span></p>
+        <button class="btn" onclick="clearCart()">Clear Cart</button>
+    </div>
+    </section>
+    <footer>
+        <p>&copy; 2023 Delicious Restaurant. All rights reserved.</p>
+    </footer>
+    <script>
+        let cartItems = [];
+        let cartTotal = 0;
+
+        function addToCart(itemName, price) {
+            cartItems.push({ itemName, price });
+            cartTotal += price;
+            updateCart();
+        }
+
+        function updateCart() {
+            const cartItemsContainer = document.getElementById('cart-items');
+            const cartTotalElement = document.getElementById('cart-total');
+
+            cartItemsContainer.innerHTML = '';
+            cartTotalElement.textContent = cartTotal.toFixed(2);
+
+            cartItems.forEach(item => {
+                const cartItemElement = document.createElement('div');
+                cartItemElement.className = 'cart-item';
+                cartItemElement.innerHTML = `
+                    <span>${item.itemName}</span>
+                    <span>$${item.price.toFixed(2)}</span>
+                `;
+                cartItemsContainer.appendChild(cartItemElement);
+            });
+        }
+
+        function clearCart() {
+            cartItems = [];
+            cartTotal = 0;
+            updateCart();
+        }
+    </script>
+</body>
+</html>
